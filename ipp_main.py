@@ -195,7 +195,13 @@ def _simulate_superposed(args, base: Parameters, k: int, *, bins: int,
     )
 
     # --- replace single stream by superposition of *k* streams ----------
-    rngs = [random.Random(base.seed or i) for i in range(k)]
+    if base.seed is None:
+        # fully random run (time-based seed inside Random())
+        rngs = [random.Random() for _ in range(k)]
+    else:
+        master = random.Random(base.seed)           # seeded once
+        rngs = [random.Random(master.getrandbits(32)) for _ in range(k)]
+    # Now build the IPP arrival streams
     ipps = [IPPArrivalProcess(base, rng=r) for r in rngs]
 
     class _Super:
