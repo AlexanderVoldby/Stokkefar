@@ -152,48 +152,109 @@ def simulate_k(base: Parameters, *, k: int, K: int, seed: int | None, bins: int 
     return res
 
 # ──────────────────────────────────────────────────────────────────────
-# 3.  CLI driver (single or multi‑k)
+# New CLI that supports *lists* for every numeric parameter
 # ──────────────────────────────────────────────────────────────────────
+import itertools, argparse
+from typing import List
+
+def _float_list(xs: List[str]) -> List[float]:
+    return [float(x) for x in xs]
+
+def _int_list(xs: List[str]) -> List[int]:
+    return [int(x) for x in xs]
 
 def build_parser() -> argparse.ArgumentParser:
-    ap = argparse.ArgumentParser("IPP/M/1/K simulator – finite capacity")
-    ap.add_argument("--seed", type=int, default=None, help="master RNG seed (None → random)")
-    ap.add_argument("--capacity", "-K", type=int, required=True, help="system capacity (queue + service)")
+    ap = argparse.ArgumentParser(
+        "IPP/M/1/K simulator – finite capacity",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    ap.add_argument("--seed", type=int, default=None,
+                    help="base RNG seed (one master seed for all runs)")
+
+    # ---- global option: capacity ------------------------------------------------
+    ap.add_argument("-K", "--capacity", metavar="CAP", type=_int_list, nargs="+",
+                    required=True, help="system capacity K (one or more)")
+
     sub = ap.add_subparsers(dest="cmd", required=True)
 
+    # ---- common arrival/service parameters --------------------------------------
     common = argparse.ArgumentParser(add_help=False)
-    common.add_argument("--omega1", type=float, default=0.2)
-    common.add_argument("--omega2", type=float, default=0.3)
-    common.add_argument("--lam-on", type=float, dest="lam_on", default=1.5)
-    common.add_argument("--mu", type=float, default=2.0)
+    common.add_argument("--omega1", type=_float_list, nargs="+", default=[0.2])
+    common.add_argument("--omega2", type=_float_list, nargs="+", default=[0.3])
+    common.add_argument("--lam-on", type=_float_list, nargs="+",
+                        dest="lam_on", default=[1.5])
+    common.add_argument("--mu", type=_float_list, nargs="+", default=[2.0])
     common.add_argument("--horizon", type=float, default=1e5)
     common.add_argument("--bins", type=int, default=80)
 
-    s_multi = sub.add_parser("multi", parents=[common], help="superpose one or more IPPs")
-    s_multi.add_argument("-k", type=int, nargs="+", default=[3])
-    s_multi.set_defaults(func=run_multi)
+    # ---- single-k convenience ----------------------------------------------------
+    s1 = sub.add_parser("single", parents=[common])
+    s1.add_argument("-k", type=_int_list, nargs="+", default=[3])
+    s1.set_defaults(func=run_grid)           # will execute the grid anyway
 
-    s_one = sub.add_parser("single", parents=[common])
-    s_one.add_argument("-k", type=int, default=1)
-    s_one.set_defaults(func=run_single)
+    # ---- multi-k sweep -----------------------------------------------------------
+    s2 = sub.add_parser("multi", parents=[common])
+    s2.add_argument("-k", type=_int_list, nargs="+", default=[1, 2, 3, 4])
+    s2.set_defaults(func=run_grid)
+
     return ap
 
-# ----------------------------------------------------------------------
 
-def run_single(args):
-    base = Parameters(
-        omega_off_to_on=args.omega1, omega_on_to_off=args.omega2,
-        lambda_on=args.lam_on, mu=args.mu, horizon=args.horizon, seed=args.seed)
-    simulate_k(base, k=args.k, K=args.capacity, seed=args.seed, bins=args.bins)
+# ──────────────────────────────────────────────────────────────────────
+# Grid runner (replaces run_single / run_multi dispatch)
+# ──────────────────────────────────────────────────────────────────────
+def run_grid(args):
+    """
+    Iterate over the Cartesian product of all lists supplied on the CLI,
+    run the finite-capacity simulator once per combination, and collect
+    the results in a single pandas DataFrame.
+    """
+    param_space = itertools.product(
+        args.capacity,
+        args.k,
+        args.omega1,
+        args.omega2,
+        args.lam_on,
+        args.mu,
+    )
 
-def run_multi(args):
-    base = Parameters(
-        omega_off_to_on=args.omega1, omega_on_to_off=args.omega2,
-        lambda_on=args.lam_on, mu=args.mu, horizon=args.horizon, seed=args.seed)
-    for k in args.k:
-        simulate_k(base, k=k, K=args.capacity, seed=args.seed, bins=args.bins)
+    all_stats = []
+    idx = 0
+    for (K, k, w1, w2, lam_on, mu) in param_space:
+        idx += 1
+        print(f"\n### Run {idx}: K={K}  k={k}  ω1={w1}  ω2={w2}  "
+              f"λON={lam_on}  μ={mu}")
+        base = Parameters(
+            omega_off_to_on=w1,
+            omega_on_to_off=w2,
+            lambda_on=lam_on,
+            mu=mu,
+            horizon=args.horizon,
+            seed=args.seed,
+        )
+        # single helper that already exists in the file
+        wq, qs, st = simulate_k(
+            base, k=k, K=K, seed=args.seed,
+            bins=args.bins)
+        all_stats.append({
+            **st,
+            "K": K,
+            "omega1": w1,
+            "omega2": w2,
+            "lam_on": lam_on,
+            "mu": mu,
+        })
 
-# ----------------------------------------------------------------------
+    # ---------- summary -------------------------------------------------
+    import pandas as pd
+    df = pd.DataFrame(all_stats)
+    cols = ["K", "k", "omega1", "omega2", "lam_on", "mu",
+            "rho_th", "rho_sim",
+            "E[Wq]", "E[Lq]", "Lq_time_avg", "p_block"]
+    print("\n———— Full grid summary ————")
+    print(df[cols].to_string(index=False,
+                             float_format=lambda x: f"{x:10.4f}"))
+    print("———————————————————————————")
 
 def main():
     ap = build_parser()

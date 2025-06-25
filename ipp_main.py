@@ -295,8 +295,8 @@ def run_multi_ipp(args):
         ax_wq.set_xlabel("Waiting time  Wq  (s)")
         ax_wq.set_ylabel("density")
         ax_wq.set_title(
-            f"Wq dist  (k={k}, μ={base.mu}, ω₁={base.omega_off_to_on}, "
-            f"ω₂={base.omega_on_to_off}, λON={base.lambda_on})"
+            f"Wq dist  (k={k}, μ={base.mu}, ω₁={base.omega_on_to_off}, "
+            f"ω₂={base.omega_off_to_on}, λON={base.lambda_on})"
         )
         fig_wq.tight_layout()
         fig_wq.savefig(fname_wq, dpi=300)
@@ -310,8 +310,8 @@ def run_multi_ipp(args):
         ax_q.set_xlabel("Queue length  Lq")
         ax_q.set_ylabel("probability")
         ax_q.set_title(
-            f"Lq PMF   (k={k}, μ={base.mu}, ω₁={base.omega_off_to_on}, "
-            f"ω₂={base.omega_on_to_off}, λON={base.lambda_on})"
+            f"Lq PMF   (k={k}, μ={base.mu}, ω₁={base.omega_on_to_off}, "
+            f"ω₂={base.omega_off_to_on}, λON={base.lambda_on})"
         )
         fig_q.tight_layout()
         fig_q.savefig(fname_q, dpi=300)
