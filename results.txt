@@ -1,0 +1,243 @@
+—— Departure-stream diagnostics ——
+ mean inter-dep : 1.6738 s
+ variance       : 11.8831 s²
+ C_v²           : 4.2413
+ CV-test        : Z = 560.2, p = 0.0e+00
+ KS vs Exp      : D = 0.2124, p = 0.0e+00
+ figures/dep_pdf_k1_mu2.0.png written.
+
+—— Busy-period statistics ——
+ mean B       : 2.2639 s   (theory: 0.7143)
+ variance     : 7.2554 s²  (theory: 0.5102)
+ figures/busy_pdf_k1_mu2.0.png written.
+  → figures/wait_times_k1_mu2p0_w10p2_w20p3_lam1p5.png and figures/queue_len_k1_
+mu2p0_w10p2_w20p3_lam1p5.png written.
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 0.8321 s
+ variance       : 1.8134 s²
+ C_v²           : 2.6190
+ CV-test        : Z = 396.9, p = 0.0e+00
+ KS vs Exp      : D = 0.0835, p = 0.0e+00
+ figures/dep_pdf_k2_mu2.0.png written.
+
+—— Busy-period statistics ——
+ mean B       : 4.4150 s   (theory: 1.2500)
+ variance     : 64.8144 s²  (theory: 1.5625)
+ figures/busy_pdf_k2_mu2.0.png written.
+  → figures/wait_times_k2_mu2p0_w10p2_w20p3_lam1p5.png and figures/queue_len_k2_
+mu2p0_w10p2_w20p3_lam1p5.png written.
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 0.5574 s
+ variance       : 0.4313 s²
+ C_v²           : 1.3882
+ CV-test        : Z = 116.3, p = 0.0e+00
+ KS vs Exp      : D = 0.0170, p = 1.5e-45
+ figures/dep_pdf_k3_mu2.0.png written.
+
+—— Busy-period statistics ——
+ mean B       : 18.8504 s   (theory: 5.0000)
+ variance     : 4555.5033 s²  (theory: 25.0000)
+ figures/busy_pdf_k3_mu2.0.png written.
+  → figures/wait_times_k3_mu2p0_w10p2_w20p3_lam1p5.png and figures/queue_len_k3_
+mu2p0_w10p2_w20p3_lam1p5.png written.
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 0.5012 s
+ variance       : 0.2516 s²
+ C_v²           : 1.0016
+ CV-test        : Z = 0.5, p = 6.2e-01
+ KS vs Exp      : D = 0.0017, p = 6.4e-01
+ figures/dep_pdf_k4_mu2.0.png written.
+
+—— Busy-period statistics ——
+ mean B       : 61.0464 s   (theory: -2.5000)
+ variance     : 15863.7061 s²  (theory: 6.2500)
+ figures/busy_pdf_k4_mu2.0.png written.
+  → figures/wait_times_k4_mu2p0_w10p2_w20p3_lam1p5.png and figures/queue_len_k4_
+mu2p0_w10p2_w20p3_lam1p5.png written.
+
+———— Summary statistics ————
+    rho_th  rho_sim     E[Wq]       Var[Wq]  95%-CI Wq      E[Lq]        Var[Lq]
+  95%-CI Lq  Lq_time_avg
+k
+
+1   0.3000   0.2988    0.6932        1.1623     0.0086     1.3890         3.3052
+     0.0103       0.4141
+2   0.6000   0.6012    2.1668        8.3086     0.0163     4.3223        28.3413
+     0.0213       2.6040
+3   0.9000   0.8984   11.7119      143.3308     0.0554    23.4903       563.8474
+     0.0777      21.0089
+4   1.2000   0.9998 9766.9568 33201736.8173    23.1011 19474.3977 132152898.5726
+    34.0244   19473.0565
+———————————————————————————
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 1.6744 s
+ variance       : 5.6509 s²
+ C_v²           : 2.0155
+ CV-test        : Z = 175.5, p = 0.0e+00
+ KS vs Exp      : D = 0.0484, p = 4.8e-122
+ figures/dep_pdf_k1_mu0.7500000000000001.png written.
+
+—— Busy-period statistics ——
+ mean B       : 27.4678 s   (theory: 6.6667)
+ variance     : 4147.7364 s²  (theory: 44.4444)
+ figures/busy_pdf_k1_mu0.7500000000000001.png written.
+  → figures/wait_times_k1_mu0p7500000000000001_w10p2_w20p3_lam1p5.png and figure
+s/queue_len_k1_mu0p7500000000000001_w10p2_w20p3_lam1p5.png written.
+
+———— Summary statistics ————
+    rho_th  rho_sim    E[Wq]  Var[Wq]  95%-CI Wq    E[Lq]  Var[Lq]  95%-CI Lq  L
+q_time_avg
+k
+
+1   0.8000   0.7965  15.4123 236.0152     0.1232  11.5593 122.6398     0.0628
+    9.2043
+———————————————————————————
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 0.8321 s
+ variance       : 1.2749 s²
+ C_v²           : 1.8411
+ CV-test        : Z = 206.2, p = 0.0e+00
+ KS vs Exp      : D = 0.0394, p = 2.2e-162
+ figures/dep_pdf_k2_mu1.5000000000000002.png written.
+
+—— Busy-period statistics ——
+ mean B       : 13.1377 s   (theory: 3.3333)
+ variance     : 1111.1895 s²  (theory: 11.1111)
+ figures/busy_pdf_k2_mu1.5000000000000002.png written.
+  → figures/wait_times_k2_mu1p5000000000000002_w10p2_w20p3_lam1p5.png and figure
+s/queue_len_k2_mu1p5000000000000002_w10p2_w20p3_lam1p5.png written.
+
+———— Summary statistics ————
+    rho_th  rho_sim    E[Wq]  Var[Wq]  95%-CI Wq    E[Lq]  Var[Lq]  95%-CI Lq  L
+q_time_avg
+k
+
+2   0.8000   0.8016   7.8404  77.9511     0.0499  11.7477 160.1911     0.0506
+    9.4220
+———————————————————————————
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 0.4184 s
+ variance       : 0.2831 s²
+ C_v²           : 1.6171
+ CV-test        : Z = 213.3, p = 0.0e+00
+ KS vs Exp      : D = 0.0291, p = 9.3e-177
+ figures/dep_pdf_k4_mu3.0000000000000004.png written.
+
+—— Busy-period statistics ——
+ mean B       : 5.7107 s   (theory: 1.6667)
+ variance     : 228.1222 s²  (theory: 2.7778)
+ figures/busy_pdf_k4_mu3.0000000000000004.png written.
+  → figures/wait_times_k4_mu3p0000000000000004_w10p2_w20p3_lam1p5.png and figure
+s/queue_len_k4_mu3p0000000000000004_w10p2_w20p3_lam1p5.png written.
+
+———— Summary statistics ————
+    rho_th  rho_sim    E[Wq]  Var[Wq]  95%-CI Wq    E[Lq]  Var[Lq]  95%-CI Lq  L
+q_time_avg
+k
+
+4   0.8000   0.7976   3.4402  16.2889     0.0162  10.3566 138.1628     0.0333
+    8.2220
+———————————————————————————
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 0.2086 s
+ variance       : 0.0577 s²
+ C_v²           : 1.3251
+ CV-test        : Z = 159.2, p = 0.0e+00
+ KS vs Exp      : D = 0.0188, p = 3.6e-148
+ figures/dep_pdf_k8_mu6.000000000000001.png written.
+
+—— Busy-period statistics ——
+ mean B       : 2.5965 s   (theory: 0.8333)
+ variance     : 61.5948 s²  (theory: 0.6944)
+ figures/busy_pdf_k8_mu6.000000000000001.png written.
+  → figures/wait_times_k8_mu6p000000000000001_w10p2_w20p3_lam1p5.png and figures
+/queue_len_k8_mu6p000000000000001_w10p2_w20p3_lam1p5.png written.
+
+———— Summary statistics ————
+    rho_th  rho_sim    E[Wq]  Var[Wq]  95%-CI Wq    E[Lq]  Var[Lq]  95%-CI Lq  L
+q_time_avg
+k
+
+8   0.8000   0.8008   1.7030   5.3680     0.0066  10.1902 180.6437     0.0269
+    8.1641
+———————————————————————————
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 0.5012 s
+ variance       : 0.2529 s²
+ C_v²           : 1.0066
+ CV-test        : Z = 2.1, p = 3.6e-02
+ KS vs Exp      : D = 0.0017, p = 6.2e-01
+ figures/dep_pdf_k3_mu2.0.png written.
+
+—— Busy-period statistics ——
+ mean B       : 1.1676 s   (theory: -4.0000)
+ variance     : 0.7372 s²  (theory: 16.0000)
+ figures/busy_pdf_k3_mu2.0.png written.
+  → figures/wait_times_k3_mu2p0_w10p05_w20p05_lam1p5.png and figures/queue_len_k
+3_mu2p0_w10p05_w20p05_lam1p5.png written.
+
+———— Summary statistics ————
+    rho_th  rho_sim     E[Wq]       Var[Wq]  95%-CI Wq      E[Lq]       Var[Lq]
+ 95%-CI Lq  Lq_time_avg
+k
+
+3   1.1250   0.9997 5915.0168 12489267.0505    14.6343 11776.6730 49537168.1930
+   21.1973   11760.2633
+———————————————————————————
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 0.5574 s
+ variance       : 0.4313 s²
+ C_v²           : 1.3882
+ CV-test        : Z = 116.3, p = 0.0e+00
+ KS vs Exp      : D = 0.0170, p = 1.5e-45
+ figures/dep_pdf_k3_mu2.0.png written.
+
+—— Busy-period statistics ——
+ mean B       : 18.8504 s   (theory: 5.0000)
+ variance     : 4555.5033 s²  (theory: 25.0000)
+ figures/busy_pdf_k3_mu2.0.png written.
+  → figures/wait_times_k3_mu2p0_w10p2_w20p3_lam1p5.png and figures/queue_len_k3_
+mu2p0_w10p2_w20p3_lam1p5.png written.
+
+———— Summary statistics ————
+    rho_th  rho_sim    E[Wq]  Var[Wq]  95%-CI Wq    E[Lq]  Var[Lq]  95%-CI Lq  L
+q_time_avg
+k
+
+3   0.9000   0.8984  11.7119 143.3308     0.0554  23.4903 563.8474     0.0777
+   21.0089
+———————————————————————————
+
+—— Departure-stream diagnostics ——
+ mean inter-dep : 0.5011 s
+ variance       : 0.2515 s²
+ C_v²           : 1.0014
+ CV-test        : Z = 0.4, p = 6.5e-01
+ KS vs Exp      : D = 0.0017, p = 6.4e-01
+ figures/dep_pdf_k3_mu2.0.png written.
+
+
+—— Busy-period statistics ——
+ mean B       : 9.1204 s   (theory: -4.0000)
+ variance     : nan s²  (theory: 16.0000)
+ figures/busy_pdf_k3_mu2.0.png written.
+  → figures/wait_times_k3_mu2p0_w15p0_w25p0_lam1p5.png and figures/queue_len_k3_
+mu2p0_w15p0_w25p0_lam1p5.png written.
+
+———— Summary statistics ————
+    rho_th  rho_sim     E[Wq]       Var[Wq]  95%-CI Wq      E[Lq]       Var[Lq]
+ 95%-CI Lq  Lq_time_avg
+k
+
+3   1.1250   1.0000 6311.9025 13485894.4783    15.1690 12583.9950 53489870.1283
+   21.9963   12587.2132
+———————————————————————————
