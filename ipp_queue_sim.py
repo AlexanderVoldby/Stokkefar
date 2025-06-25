@@ -105,6 +105,10 @@ class SimulationResults:
     event_log: list[EventRecord] | None = None  # only if log_events=True
     metrics: dict[str, Any] = field(default_factory=dict)  # populated by Metric.finalise()
 
+    # Used when we run a finite queue length simulation
+    total_arrivals: int = 0
+    blocked: int = 0
+
     def pretty_print(self, params: Parameters) -> None:
         n = len(self.wait_times)
         mean_wq = self.wait_times.mean()

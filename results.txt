@@ -1,3 +1,5 @@
+$ bash run_experiments.sh
+
 —— Departure-stream diagnostics ——
  mean inter-dep : 1.6738 s
  variance       : 11.8831 s²
@@ -224,7 +226,13 @@ k
  CV-test        : Z = 0.4, p = 6.5e-01
  KS vs Exp      : D = 0.0017, p = 6.4e-01
  figures/dep_pdf_k3_mu2.0.png written.
-
+C:\Users\Anders\OneDrive - Danmarks Tekniske Universitet\DTU\8. Semester\02443 S
+tochastic Simulation\project2\ipp_main.py:372: RuntimeWarning: Degrees of freedo
+m <= 0 for slice
+  var_B  = bp_lengths.var(ddof=1)
+C:\Users\Anders\anaconda3\envs\02443\Lib\site-packages\numpy\_core\_methods.py:2
+15: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
 
 —— Busy-period statistics ——
  mean B       : 9.1204 s   (theory: -4.0000)
