@@ -114,6 +114,8 @@ class SimulationResults:
         print(f" mean W_q  (sec)      : {mean_wq:.4f}")
         print(f" mean L_q             : {mean_lq:.4f}")
         print(f" utilisation (ρ)      : {self.utilisation:.4f}")
+        if "L_time_avg" in self.metrics:
+            print(f" time-avg L_q         : {self.metrics['L_time_avg']:.4f}")
         if self.metrics:
             print(" ancillary metrics    :")
             for k, v in self.metrics.items():
@@ -316,6 +318,8 @@ class IPPQueueSimulator:
         self.next_arrival = self.arrivals.next_arrival(self.t)
         self.next_departure = math.inf  # none yet
         self.busy_time = 0.0
+        self.area_q = 0.0
+        self.last_event_time = 0.0
 
         # Collected samples ---------------------------------------------
         self.wait_times: List[float] = []
@@ -349,12 +353,18 @@ class IPPQueueSimulator:
             except Exception as exc:  # pragma: no cover
                 print(f"[WARN] metric '{m.name}' raised {exc}", file=sys.stderr)
 
+        results.metrics["L_time_avg"] = self.area_q / self.params.horizon
         return results
 
     # ------------------------------------------------------------------
     # Event handlers
     # ------------------------------------------------------------------
+    def _advance_area(self, new_time, q_now):
+        self.area_q += q_now * (new_time - self.last_event_time)
+        self.last_event_time = new_time
+    
     def _handle_arrival(self):
+        self._advance_area(self.next_arrival, len(self.queue))
         self.t = self.next_arrival
         svc = self.rng.expovariate(self.params.mu)
         if self.t >= self.server_busy_until:
@@ -373,6 +383,7 @@ class IPPQueueSimulator:
         self._log_event(EventType.ARRIVAL)
 
     def _handle_departure(self):
+        self._advance_area(self.next_departure, len(self.queue))
         self.t = self.next_departure
         if self.queue:
             svc = self.queue.pop(0)

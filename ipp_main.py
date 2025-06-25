@@ -238,6 +238,7 @@ def _simulate_superposed(args, base: Parameters, k: int, *, bins: int,
         "E[Lq]": qs.mean(),
         "Var[Lq]": qs.var(ddof=1),
         "95%-CI Lq": _ci95(qs),
+        "Lq_time_avg": res.metrics.get("L_time_avg", np.nan),
     }
 
     if args.dep_diag:
